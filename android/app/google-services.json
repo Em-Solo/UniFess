@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1044479718938",
+    "project_id": "unifess-9f048",
+    "storage_bucket": "unifess-9f048.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044479718938:android:b74d0890289f39960683a3",
+        "android_client_info": {
+          "package_name": "com.example.unifess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044479718938-l5pg69fu0u4kab88o9e86guvbljq5eon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9sk3SIJQJAHho6cnGobHgCAfiCODPZNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044479718938-l5pg69fu0u4kab88o9e86guvbljq5eon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
