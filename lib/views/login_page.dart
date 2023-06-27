@@ -4,7 +4,7 @@ import 'package:unifess/components/my_button.dart';
 import 'package:unifess/components/my_textfield.dart';
 import 'package:unifess/components/square_tile.dart';
 import 'package:unifess/providers/firebase_auth_providers.dart';
-import 'package:unifess/services/auth/auth_user.dart';
+import 'package:unifess/repositiories/auth/auth_user.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -87,17 +87,20 @@ class LoginPage extends StatelessWidget {
                             password: passwordController.text.trim());
 
                         ref.read(logInProvider(params)).when(
-                              data: (AuthUser user) {},
-                              error: (Object e, _) {
-                                print(e);
-                                print("Could not log in");
-                                return const Text("Could not log in");
-                              },
-                              loading: () {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              },
-                            );
+                          data: (AuthUser user) {
+                            print("Logged in");
+                            print(user);
+                          },
+                          error: (Object e, _) {
+                            print(e);
+                            print("Could not log in");
+                            return const Text("Could not log in");
+                          },
+                          loading: () {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          },
+                        );
                       },
                     );
                   },

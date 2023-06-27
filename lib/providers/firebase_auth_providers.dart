@@ -1,7 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unifess/services/auth/auth_user.dart';
-import 'package:unifess/services/auth/firebase_auth_service.dart';
+import 'package:unifess/repositiories/auth/auth_user.dart';
+import 'package:unifess/repositiories/auth/firebase_auth_service.dart';
+
+final authStateChangesProvider = StreamProvider<User?>((ref) {
+  final authService = ref.read(firebaseAuthProvider);
+  return authService.authStateChange;
+});
 
 class AuthParams extends Equatable {
   const AuthParams({

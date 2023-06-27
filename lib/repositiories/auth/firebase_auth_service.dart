@@ -1,17 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unifess/services/auth/auth_exceptions.dart';
-import 'package:unifess/services/auth/auth_service.dart';
-import 'package:unifess/services/auth/auth_user.dart';
+import 'package:unifess/repositiories/auth/auth_exceptions.dart';
+import 'package:unifess/repositiories/auth/auth_service.dart';
+import 'package:unifess/repositiories/auth/auth_user.dart';
 
-class FirebaseAuthService extends AuthService {
+class FirebaseAuthService extends AuthRepository {
+  final FirebaseAuth _auth;
+
+  FirebaseAuthService(this._auth);
+
+  Stream<User?> get authStateChange => _auth.authStateChanges();
+
   @override
   Future<AuthUser> createUser({
     required String email,
     required String password,
   }) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -40,7 +46,7 @@ class FirebaseAuthService extends AuthService {
 
   @override
   AuthUser? get currentUser {
-    final user = FirebaseAuth.instance.currentUser;
+    final user = _auth.currentUser;
 
     if (user != null) {
       return AuthUser.fromFirebase(user);
@@ -55,7 +61,7 @@ class FirebaseAuthService extends AuthService {
     required String password,
   }) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -82,7 +88,7 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> logOut() async {
-    final user = FirebaseAuth.instance.currentUser;
+    final user = _auth.currentUser;
 
     if (user != null) {
       await FirebaseAuth.instance.signOut();
@@ -93,7 +99,7 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> sendEmailVerification() async {
-    final user = FirebaseAuth.instance.currentUser;
+    final user = _auth.currentUser;
 
     if (user != null) {
       await user.sendEmailVerification();
@@ -110,5 +116,5 @@ class FirebaseAuthService extends AuthService {
 }
 
 // returns an instance of the firebase auth service, also works as a singleton implementation.
-final firebaseAuthProvider =
-    Provider<FirebaseAuthService>((ref) => FirebaseAuthService());
+final firebaseAuthProvider = Provider<FirebaseAuthService>(
+    (ref) => FirebaseAuthService(FirebaseAuth.instance));
