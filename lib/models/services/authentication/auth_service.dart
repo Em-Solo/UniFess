@@ -1,6 +1,6 @@
-import 'package:unifess/repositiories/auth/auth_user.dart';
+import 'package:unifess/models/services/authentication/auth_user.dart';
 
-abstract class AuthRepository {
+abstract class AuthService {
   Future<AuthUser> createUser({
     required String email,
     required String password,

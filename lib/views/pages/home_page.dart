@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unifess/providers/firebase_auth_providers.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

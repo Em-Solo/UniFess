@@ -1,15 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:unifess/repositiories/auth/auth_exceptions.dart';
-import 'package:unifess/repositiories/auth/auth_service.dart';
-import 'package:unifess/repositiories/auth/auth_user.dart';
+import 'package:unifess/models/services/authentication/auth_exceptions.dart';
+import 'package:unifess/models/services/authentication/auth_service.dart';
+import 'package:unifess/models/services/authentication/auth_user.dart';
 
-class FirebaseAuthService extends AuthRepository {
+class FirebaseAuthService extends AuthService {
   final FirebaseAuth _auth;
 
   FirebaseAuthService(this._auth);
-
-  Stream<User?> get authStateChange => _auth.authStateChanges();
 
   @override
   Future<AuthUser> createUser({
@@ -114,7 +111,3 @@ class FirebaseAuthService extends AuthRepository {
     throw UnimplementedError();
   }
 }
-
-// returns an instance of the firebase auth service, also works as a singleton implementation.
-final firebaseAuthProvider = Provider<FirebaseAuthService>(
-    (ref) => FirebaseAuthService(FirebaseAuth.instance));
